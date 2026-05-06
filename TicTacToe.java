@@ -54,20 +54,34 @@ public class TicTacToe {
         System.out.println("Computer Symbol: " + computerSymbol);
         System.out.println(currentPlayer + " will play first.");
 
-        // UC3: User slot input
+        // UC3 + UC4
         int slot = getUserSlot();
 
-        System.out.println("Selected Slot: " + slot);
+        int row = getRow(slot);
+        int col = getCol(slot);
+
+        System.out.println("\nSelected Slot: " + slot);
+        System.out.println("Row Index: " + row);
+        System.out.println("Column Index: " + col);
     }
 
+    // UC3
     public static int getUserSlot() {
 
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("\nEnter slot number (1-9): ");
 
-        int slot = scanner.nextInt();
+        return scanner.nextInt();
+    }
 
-        return slot;
+    // UC4
+    public static int getRow(int slot) {
+        return (slot - 1) / 3;
+    }
+
+    // UC4
+    public static int getCol(int slot) {
+        return (slot - 1) % 3;
     }
 }
