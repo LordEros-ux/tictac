@@ -37,6 +37,7 @@ public class TicTacToe {
 
                     placeMove(board, row, col, humanSymbol);
 
+                    // UC9 Winner Check
                     if (checkWinner(board, humanSymbol)) {
 
                         printBoard(board);
@@ -69,6 +70,7 @@ public class TicTacToe {
 
                 computerMove(board, computerSymbol);
 
+                // UC9 Winner Check
                 if (checkWinner(board, computerSymbol)) {
 
                     printBoard(board);
@@ -158,7 +160,7 @@ public class TicTacToe {
         board[row][col] = symbol;
     }
 
-    // Computer random move
+    // Computer move
     public static void computerMove(char[][] board, char computerSymbol) {
 
         int slot;
@@ -179,10 +181,10 @@ public class TicTacToe {
         System.out.println("Computer selected slot: " + slot);
     }
 
-    // Check winner
+    // UC9 Winner check
     public static boolean checkWinner(char[][] board, char symbol) {
 
-        // Rows
+        // Check rows
         for (int row = 0; row < 3; row++) {
 
             if (board[row][0] == symbol &&
@@ -193,7 +195,7 @@ public class TicTacToe {
             }
         }
 
-        // Columns
+        // Check columns
         for (int col = 0; col < 3; col++) {
 
             if (board[0][col] == symbol &&
@@ -204,7 +206,7 @@ public class TicTacToe {
             }
         }
 
-        // Diagonals
+        // Check main diagonal
         if (board[0][0] == symbol &&
             board[1][1] == symbol &&
             board[2][2] == symbol) {
@@ -212,6 +214,7 @@ public class TicTacToe {
             return true;
         }
 
+        // Check opposite diagonal
         if (board[0][2] == symbol &&
             board[1][1] == symbol &&
             board[2][0] == symbol) {
