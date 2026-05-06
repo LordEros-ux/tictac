@@ -8,16 +8,9 @@ public class TicTacToe {
         char[][] board = new char[3][3];
 
         // Initialize board
-        for (int row = 0; row < 3; row++) {
+        initializeBoard(board);
 
-            for (int col = 0; col < 3; col++) {
-                board[row][col] = '-';
-            }
-        }
-
-        // Print board
         System.out.println("Tic-Tac-Toe Board:");
-
         printBoard(board);
 
         // Toss logic
@@ -50,20 +43,35 @@ public class TicTacToe {
         // Get slot
         int slot = getUserSlot();
 
-        // Convert slot to indices
+        // Convert slot
         int row = getRow(slot);
         int col = getCol(slot);
-
-        System.out.println("\nRow Index: " + row);
-        System.out.println("Column Index: " + col);
 
         // Validate move
         boolean validMove = isValidMove(board, row, col);
 
         if (validMove) {
-            System.out.println("Valid Move");
+
+            // UC6 Place move
+            placeMove(board, row, col, humanSymbol);
+
+            System.out.println("\nUpdated Board:");
+            printBoard(board);
+
         } else {
+
             System.out.println("Invalid Move");
+        }
+    }
+
+    // Initialize board
+    public static void initializeBoard(char[][] board) {
+
+        for (int row = 0; row < 3; row++) {
+
+            for (int col = 0; col < 3; col++) {
+                board[row][col] = '-';
+            }
         }
     }
 
@@ -80,7 +88,7 @@ public class TicTacToe {
         }
     }
 
-    // User input
+    // Get user slot
     public static int getUserSlot() {
 
         Scanner scanner = new Scanner(System.in);
@@ -100,15 +108,19 @@ public class TicTacToe {
         return (slot - 1) % 3;
     }
 
-    // UC5 Validation
+    // Validate move
     public static boolean isValidMove(char[][] board, int row, int col) {
 
-        // Boundary check
         if (row < 0 || row > 2 || col < 0 || col > 2) {
             return false;
         }
 
-        // Cell empty check
         return board[row][col] == '-';
     }
-}
+
+    // UC6 Place move
+    public static void placeMove(char[][] board, int row, int col, char symbol) {
+
+        board[row][col] = symbol;
+    }
+}5
