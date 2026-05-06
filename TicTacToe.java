@@ -37,7 +37,7 @@ public class TicTacToe {
 
                     placeMove(board, row, col, humanSymbol);
 
-                    // UC9 Winner Check
+                    // Winner check
                     if (checkWinner(board, humanSymbol)) {
 
                         printBoard(board);
@@ -46,7 +46,9 @@ public class TicTacToe {
 
                         gameRunning = false;
 
-                    } else if (isBoardFull(board)) {
+                    }
+                    // UC10 Draw Check
+                    else if (isBoardFull(board)) {
 
                         printBoard(board);
 
@@ -70,7 +72,7 @@ public class TicTacToe {
 
                 computerMove(board, computerSymbol);
 
-                // UC9 Winner Check
+                // Winner check
                 if (checkWinner(board, computerSymbol)) {
 
                     printBoard(board);
@@ -79,7 +81,9 @@ public class TicTacToe {
 
                     gameRunning = false;
 
-                } else if (isBoardFull(board)) {
+                }
+                // UC10 Draw Check
+                else if (isBoardFull(board)) {
 
                     printBoard(board);
 
@@ -160,7 +164,7 @@ public class TicTacToe {
         board[row][col] = symbol;
     }
 
-    // Computer move
+    // Computer random move
     public static void computerMove(char[][] board, char computerSymbol) {
 
         int slot;
@@ -181,10 +185,10 @@ public class TicTacToe {
         System.out.println("Computer selected slot: " + slot);
     }
 
-    // UC9 Winner check
+    // Check winner
     public static boolean checkWinner(char[][] board, char symbol) {
 
-        // Check rows
+        // Rows
         for (int row = 0; row < 3; row++) {
 
             if (board[row][0] == symbol &&
@@ -195,7 +199,7 @@ public class TicTacToe {
             }
         }
 
-        // Check columns
+        // Columns
         for (int col = 0; col < 3; col++) {
 
             if (board[0][col] == symbol &&
@@ -206,7 +210,7 @@ public class TicTacToe {
             }
         }
 
-        // Check main diagonal
+        // Main diagonal
         if (board[0][0] == symbol &&
             board[1][1] == symbol &&
             board[2][2] == symbol) {
@@ -214,7 +218,7 @@ public class TicTacToe {
             return true;
         }
 
-        // Check opposite diagonal
+        // Opposite diagonal
         if (board[0][2] == symbol &&
             board[1][1] == symbol &&
             board[2][0] == symbol) {
@@ -225,7 +229,7 @@ public class TicTacToe {
         return false;
     }
 
-    // Check draw
+    // UC10 Draw check
     public static boolean isBoardFull(char[][] board) {
 
         for (int row = 0; row < 3; row++) {
