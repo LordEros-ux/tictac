@@ -18,14 +18,7 @@ public class TicTacToe {
         // Print board
         System.out.println("Tic-Tac-Toe Board:");
 
-        for (int row = 0; row < 3; row++) {
-
-            for (int col = 0; col < 3; col++) {
-                System.out.print(board[row][col] + " ");
-            }
-
-            System.out.println();
-        }
+        printBoard(board);
 
         // Toss logic
         Random random = new Random();
@@ -54,18 +47,40 @@ public class TicTacToe {
         System.out.println("Computer Symbol: " + computerSymbol);
         System.out.println(currentPlayer + " will play first.");
 
-        // UC3 + UC4
+        // Get slot
         int slot = getUserSlot();
 
+        // Convert slot to indices
         int row = getRow(slot);
         int col = getCol(slot);
 
-        System.out.println("\nSelected Slot: " + slot);
-        System.out.println("Row Index: " + row);
+        System.out.println("\nRow Index: " + row);
         System.out.println("Column Index: " + col);
+
+        // Validate move
+        boolean validMove = isValidMove(board, row, col);
+
+        if (validMove) {
+            System.out.println("Valid Move");
+        } else {
+            System.out.println("Invalid Move");
+        }
     }
 
-    // UC3
+    // Print board
+    public static void printBoard(char[][] board) {
+
+        for (int row = 0; row < 3; row++) {
+
+            for (int col = 0; col < 3; col++) {
+                System.out.print(board[row][col] + " ");
+            }
+
+            System.out.println();
+        }
+    }
+
+    // User input
     public static int getUserSlot() {
 
         Scanner scanner = new Scanner(System.in);
@@ -75,13 +90,25 @@ public class TicTacToe {
         return scanner.nextInt();
     }
 
-    // UC4
+    // Convert slot to row
     public static int getRow(int slot) {
         return (slot - 1) / 3;
     }
 
-    // UC4
+    // Convert slot to column
     public static int getCol(int slot) {
         return (slot - 1) % 3;
+    }
+
+    // UC5 Validation
+    public static boolean isValidMove(char[][] board, int row, int col) {
+
+        // Boundary check
+        if (row < 0 || row > 2 || col < 0 || col > 2) {
+            return false;
+        }
+
+        // Cell empty check
+        return board[row][col] == '-';
     }
 }
